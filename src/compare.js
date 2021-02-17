@@ -3,10 +3,10 @@ import fs from 'fs';
 import _ from 'lodash';
 
 export const buildDiff = (filepath1, filepath2) => {
-  const file1 = fs.readFileSync(filepath1);
-  const file2 = fs.readFileSync(filepath2);
-  const content1 = JSON.parse(file1);
-  const content2 = JSON.parse(file2);
+  // const file1 = fs.readFileSync(filepath1);
+  // const file2 = fs.readFileSync(filepath2);
+  const content1 = JSON.parse(fs.readFileSync(filepath1));
+  const content2 = JSON.parse(fs.readFileSync(filepath2));
   const keys1 = Object.keys(content1);
   const keys2 = Object.keys(content2);
   const concatKeys = [...keys1, ...keys2];
