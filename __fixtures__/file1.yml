@@ -1,0 +1,8 @@
+
+plugins:
+  jest
+env:
+  node
+rules: 
+  no-underscore-dangle
+  

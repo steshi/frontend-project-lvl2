@@ -21,5 +21,8 @@ Options:
 </pre>
 <h3>Asciinema preview</h3>
 
-gendiff
+gendiff plain json files
 <a href="https://asciinema.org/a/405BumdNK1Li5dL9FttNUCx2r" target="_blank"><img src="https://asciinema.org/a/405BumdNK1Li5dL9FttNUCx2r.svg" width="200" height="150" /></a>
+
+gendiff plain yaml files
+<a href="https://asciinema.org/a/392101" target="_blank"><img src="https://asciinema.org/a/392101.svg" width="200" height="150" /></a>

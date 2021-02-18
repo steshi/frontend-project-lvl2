@@ -1,0 +1,7 @@
+{
+  - env : node
+  + extends : air-base
+    plugins : jest
+  - rules : no-underscore-dangle
+  + rules : underscore-dangle
+  }

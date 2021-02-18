@@ -1,3 +1,3 @@
-import genDiff from './src/compare.js';
+import { genDiff } from './src/compare.js';
 
 export default genDiff;

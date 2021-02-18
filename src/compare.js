@@ -1,17 +1,15 @@
 import program from 'commander';
-import fs from 'fs';
 import _ from 'lodash';
+import parse from './parsers.js';
 
 export const buildDiff = (filepath1, filepath2) => {
-  // const file1 = fs.readFileSync(filepath1);
-  // const file2 = fs.readFileSync(filepath2);
-  const content1 = JSON.parse(fs.readFileSync(filepath1));
-  const content2 = JSON.parse(fs.readFileSync(filepath2));
+  const content1 = parse(filepath1);
+  const content2 = parse(filepath2);
   const keys1 = Object.keys(content1);
   const keys2 = Object.keys(content2);
   const concatKeys = [...keys1, ...keys2];
   const uniqeKeys = Array.from(new Set(concatKeys));
-  const sorted = _.sortedUniq(uniqeKeys);
+  const sorted = _.orderBy(uniqeKeys);
   const result = sorted.reduce((acc, key) => {
     if (content1[key] === content2[key]) {
       return [...acc, `    ${key} : ${content1[key]}`];
@@ -27,7 +25,7 @@ export const buildDiff = (filepath1, filepath2) => {
   return `{\n${result.join('\n')}\n  }`;
 };
 
-const main = () => {
+export const genDiff = () => {
   program
     .version('1.0.11')
     .description('Compares two configuration files and shows a difference.')
@@ -35,12 +33,11 @@ const main = () => {
     .arguments('<filepath1> <filepath2>')
     .action((filepath1, filepath2) => {
       console.log(buildDiff(filepath1, filepath2));
+      return buildDiff(filepath1, filepath2);
     })
     .parse();
 //  const options = program.opts();
 };
-
-export default main;
 
 // console.log('sooooo:');
 // if (options.format) console.log(`- ${options.format}`);
