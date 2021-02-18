@@ -34,7 +34,7 @@ const main = () => {
     .option('-f, --format [type]', 'output format')
     .arguments('<filepath1> <filepath2>')
     .action((filepath1, filepath2) => {
-      console.log('11111111111', buildDiff(filepath1, filepath2));
+      console.log(buildDiff(filepath1, filepath2));
     })
     .parse();
 //  const options = program.opts();
