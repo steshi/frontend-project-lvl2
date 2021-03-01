@@ -1,43 +1,48 @@
-import program from 'commander';
 import _ from 'lodash';
-import parse from './parsers.js';
 
-export const buildDiff = (filepath1, filepath2) => {
-  const content1 = parse(filepath1);
-  const content2 = parse(filepath2);
-  const keys1 = Object.keys(content1);
-  const keys2 = Object.keys(content2);
-  const concatKeys = [...keys1, ...keys2];
+const buildDiff = (obj1, obj2) => {
+  const keysObj1 = Object.keys(obj1);
+  const keysObj2 = Object.keys(obj2);
+  const concatKeys = [...keysObj1, ...keysObj2];
   const uniqeKeys = Array.from(new Set(concatKeys));
   const sorted = _.orderBy(uniqeKeys);
   const result = sorted.reduce((acc, key) => {
-    if (content1[key] === content2[key]) {
-      return [...acc, `    ${key} : ${content1[key]}`];
+    const current = {};
+    if ((typeof obj1[key] === 'object') && (typeof obj2[key] === 'object')) {
+      current.type = 'obj';
+      current.key = key;
+      current.value = buildDiff(obj1[key], obj2[key]);
+      acc.push(current);
+      return acc;
     }
-    if (content1[key] === undefined) {
-      return [...acc, `  + ${key} : ${content2[key]}`];
+    if (obj1[key] === undefined) {
+      current.type = 'new';
+      current.key = key;
+      current.value = obj2[key];
+      acc.push(current);
+      return acc;
     }
-    if (content2[key] === undefined) {
-      return [...acc, `  - ${key} : ${content1[key]}`];
+    if (obj2[key] === undefined) {
+      current.type = 'deleted';
+      current.key = key;
+      current.value = obj1[key];
+      acc.push(current);
+      return acc;
     }
-    return [...acc, `  - ${key} : ${content1[key]}`, `  + ${key} : ${content2[key]}`];
+    if (obj1[key] === obj2[key]) {
+      current.type = 'same';
+      current.key = key;
+      current.value = obj1[key];
+      acc.push(current);
+      return acc;
+    }
+    current.type = 'changed';
+    current.key = key;
+    current.value = [obj1[key], obj2[key]];
+    acc.push(current);
+    return acc;
   }, []);
-  return `{\n${result.join('\n')}\n  }`;
+  return result;
 };
 
-export const genDiff = () => {
-  program
-    .version('1.0.11')
-    .description('Compares two configuration files and shows a difference.')
-    .option('-f, --format [type]', 'output format')
-    .arguments('<filepath1> <filepath2>')
-    .action((filepath1, filepath2) => {
-      console.log(buildDiff(filepath1, filepath2));
-      return buildDiff(filepath1, filepath2);
-    })
-    .parse();
-//  const options = program.opts();
-};
-
-// console.log('sooooo:');
-// if (options.format) console.log(`- ${options.format}`);
+export default buildDiff;
