@@ -22,5 +22,4 @@ Options:
 <h3>Asciinema preview</h3>
 
 Generating difference between two json files. Output format - stylish.
-<a href="https://asciinema.org/a/395683" target="_blank"><img src="hhttps://asciinema.org/a/395683.svg" width="400" height="300" /></a>
-
+<a href="https://asciinema.org/a/395683" target="_blank"><img src="https://asciinema.org/a/395683.svg" width="400" height="300" /></a>
