@@ -12,27 +12,21 @@ const format = (data, replacer = ' ', spaceCount = 4) => {
 
     if (Array.isArray(obj)) {
       const maped = obj.map((container) => {
-        let current;
         if (container.type === 'changed') {
           const preState = `${negativeIndent}${container.key}: ${iterTree(container.value[0], currSpaceCount + spaceCount)}`;
           const postState = `${positiveIndent}${container.key}: ${iterTree(container.value[1], currSpaceCount + spaceCount)}`;
-          current = `${preState}\n${postState}`;
+          return `${preState}\n${postState}`;
         }
-        switch (container.type) {
-          case 'deleted':
-            current = `${negativeIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
-            break;
-          case 'new':
-            current = `${positiveIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
-            break;
-          case !'obj':
-            current = `${neutralIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
-            break;
-          default:
-            current = `${neutralIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
-            break;
+        if (container.type === 'deleted') {
+          return `${negativeIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
         }
-        return current;
+        if (container.type === 'new') {
+          return `${positiveIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
+        }
+        if (container.type !== 'obj') {
+          return `${neutralIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
+        }
+        return `${neutralIndent}${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
       });
       const resultStr = `{\n${maped.join('\n')}\n${bracketIndent}}`;
       return resultStr;
