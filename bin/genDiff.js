@@ -16,5 +16,8 @@ program
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Optional choose type of outpoot format [stylish]', 'stylish')
   .arguments('<filepath1> <filepath2>')
-  .action((filepath1, filepath2) => genDiff(filepath1, filepath2, program.opts().format))
+  .action((filepath1, filepath2) => {
+    const diff = genDiff(filepath1, filepath2, program.opts().format);
+    console.log(diff);
+  })
   .parse();

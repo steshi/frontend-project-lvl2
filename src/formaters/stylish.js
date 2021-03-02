@@ -1,4 +1,4 @@
-export const stylish = (data, replacer = ' ', spaceCount = 4) => {
+const format = (data, replacer = ' ', spaceCount = 4) => {
   const iterTree = (obj, currSpaceCount) => {
     if ((typeof obj !== 'object') || (obj === null)) {
       return `${obj}`;
@@ -47,4 +47,4 @@ export const stylish = (data, replacer = ' ', spaceCount = 4) => {
   return iterTree(data, spaceCount);
 };
 
-export const another = (data) => `${data}`;
+export default format;

@@ -23,3 +23,5 @@ Options:
 
 Generating difference between two json files. Output format - stylish.
 <a href="https://asciinema.org/a/395683" target="_blank"><img src="https://asciinema.org/a/395683.svg" width="400" height="300" /></a>
+Generating difference between two json files. Output format - plain.
+<a href="https://asciinema.org/a/396129" target="_blank"><img src="https://asciinema.org/a/396129.svg" width="400" height="300" /></a>
