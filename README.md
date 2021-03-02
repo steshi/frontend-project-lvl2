@@ -19,7 +19,7 @@ Options:
   -f, --format [type]  output format 
   -h, --help           output usage information
 </pre>
-<h3>Asciinema preview</h3>
+<h3>Asciinema previews</h3>
 
 <b>Generating difference between two json files.</b><br> 
 Output format - stylish.<br>
