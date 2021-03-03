@@ -15,24 +15,19 @@ const format = (data) => {
   const iter = (data1, parent) => {
     const reduced = data1.reduce((acc, container) => {
       const currentParrent = (parent === '') ? '' : `${parent}.`;
-      const currentProp = `${currentParrent}${container.key}`;
-      let current;
+      const currentProperty = `${currentParrent}${container.key}`;
 
       if (container.type === 'changed') {
-        current = `Property '${currentProp}' was updated. From ${normalize(container.value[0])} to ${normalize(container.value[1])}`;
-        return [...acc, current];
+        return [...acc, `Property '${currentProperty}' was updated. From ${normalize(container.value[0])} to ${normalize(container.value[1])}`];
       }
       if (container.type === 'deleted') {
-        current = `Property '${currentProp}' was removed`;
-        return [...acc, current];
+        return [...acc, `Property '${currentProperty}' was removed`];
       }
       if (container.type === 'new') {
-        current = `Property '${currentProp}' was added with value: ${normalize(container.value)}`;
-        return [...acc, current];
+        return [...acc, `Property '${currentProperty}' was added with value: ${normalize(container.value)}`];
       }
       if (container.type === 'obj') {
-        current = `${iter(container.value, `${currentProp}`)}`;
-        return [...acc, current];
+        return [...acc, `${iter(container.value, `${currentProperty}`)}`];
       }
       return acc;
     }, []);
