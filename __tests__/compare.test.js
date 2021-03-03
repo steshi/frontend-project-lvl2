@@ -28,3 +28,9 @@ test('buildDiff files in plain format', () => {
   const file2Path = path.join(__dirname, '..', '__fixtures__', 'file2.yml');
   expect(genDiff(file1Path, file2Path, 'plain')).toBe(expectedResult);
 });
+test('buildDiff files in JSON format', () => {
+  const expectedResult = readFile('resultJson.txt');
+  const file1Path = path.join(__dirname, '..', '__fixtures__', 'file1.yml');
+  const file2Path = path.join(__dirname, '..', '__fixtures__', 'file2.yml');
+  expect(genDiff(file1Path, file2Path, 'json')).toBe(expectedResult);
+});

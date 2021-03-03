@@ -14,6 +14,11 @@ const genDiff = (filepath1, filepath2, formatType) => {
     const formatedTree = formaters.plain(ast);
     return formatedTree;
   }
+  if (formatType === 'json') {
+    const formatedTree = formaters.json(ast);
+    return formatedTree;
+  }
+
   const message = `Err. ${formatType} - no such format.`;
   return message;
 };

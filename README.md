@@ -26,3 +26,5 @@ Output format - stylish.<br>
 <a href="https://asciinema.org/a/395683" target="_blank"><img src="https://asciinema.org/a/395683.svg" width="400" height="300" /></a><br>
 Output format - plain.<br>
 <a href="https://asciinema.org/a/396129" target="_blank"><img src="https://asciinema.org/a/396129.svg" width="400" height="300" /></a><br>
+Output format - JSON.<br>
+<a href="https://asciinema.org/a/396456" target="_blank"><img src="https://asciinema.org/a/396456.svg" width="400" height="300" /></a><br>
