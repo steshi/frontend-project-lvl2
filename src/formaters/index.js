@@ -8,7 +8,7 @@ const format = (ast, formatType) => {
     plain: plain(ast),
     json: json(ast),
   };
-  return foramters[formatType];
+  return foramters[formatType] ?? `[${formatType}] format not supported`;
 };
 
 export default format;
