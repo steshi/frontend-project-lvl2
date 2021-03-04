@@ -1,5 +1,19 @@
 import _ from 'lodash';
-
+// if ((typeof obj1[key] === 'object') && (typeof obj2[key] === 'object')) {
+//   acc = [...acc, { type: 'obj', name: `${key}`, value: `${buildDiff(obj1[key], obj2[key])}` }];
+// }
+// if (obj1[key] === undefined) {
+//   acc = [...acc, { type: 'new', name: key, value: obj2[key] }];
+// }
+// if (obj2[key] === undefined) {
+//   acc = [...acc, { type: 'deleted', name: key, value: obj1[key] }];
+// }
+// if (obj1[key] === obj2[key]) {
+//   acc = [...acc, { type: 'same', name: key, value: obj1[key] }];
+// } else {
+//   acc = [...acc, { type: 'changed', name: key, value: [obj1[key], obj2[key]] }];
+// }
+// return acc;
 const buildDiff = (obj1, obj2) => {
   const keysObj1 = Object.keys(obj1);
   const keysObj2 = Object.keys(obj2);
@@ -7,40 +21,34 @@ const buildDiff = (obj1, obj2) => {
   const uniqeKeys = Array.from(new Set(concatKeys));
   const sorted = _.orderBy(uniqeKeys);
   const result = sorted.reduce((acc, key) => {
-    const current = {};
+    const node = {};
     if ((typeof obj1[key] === 'object') && (typeof obj2[key] === 'object')) {
-      current.type = 'obj';
-      current.name = key;
-      current.value = buildDiff(obj1[key], obj2[key]);
-      acc.push(current);
-      return acc;
+      node.type = 'obj';
+      node.name = key;
+      node.value = buildDiff(obj1[key], obj2[key]);
     }
     if (obj1[key] === undefined) {
-      current.type = 'new';
-      current.name = key;
-      current.value = obj2[key];
-      acc.push(current);
-      return acc;
+      node.type = 'new';
+      node.name = key;
+      node.value = obj2[key];
     }
     if (obj2[key] === undefined) {
-      current.type = 'deleted';
-      current.name = key;
-      current.value = obj1[key];
-      acc.push(current);
-      return acc;
+      node.type = 'deleted';
+      node.name = key;
+      node.value = obj1[key];
     }
     if (obj1[key] === obj2[key]) {
-      current.type = 'same';
-      current.name = key;
-      current.value = obj1[key];
-      acc.push(current);
-      return acc;
+      node.type = 'same';
+      node.name = key;
+      node.value = obj1[key];
     }
-    current.type = 'changed';
-    current.name = key;
-    current.value = [obj1[key], obj2[key]];
-    acc.push(current);
-    return acc;
+    if (node.type === undefined) {
+      node.type = 'changed';
+      node.name = key;
+      node.value = [obj1[key], obj2[key]];
+      return [...acc, node];
+    }
+    return [...acc, node];
   }, []);
   return result;
 };
