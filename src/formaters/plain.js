@@ -16,20 +16,20 @@ const format = (data) => {
     const reduced = data1.reduce((acc, container) => {
       const currentParrent = (parent === '') ? '' : `${parent}.`;
       const currentProperty = `${currentParrent}${container.name}`;
-
+      const temp = acc;
       if (container.type === 'changed') {
-        return [...acc, `Property '${currentProperty}' was updated. From ${normalize(container.value[0])} to ${normalize(container.value[1])}`];
+        acc.push(`Property '${currentProperty}' was updated. From ${normalize(container.value[0])} to ${normalize(container.value[1])}`);
       }
       if (container.type === 'deleted') {
-        return [...acc, `Property '${currentProperty}' was removed`];
+        acc.push(`Property '${currentProperty}' was removed`);
       }
       if (container.type === 'new') {
-        return [...acc, `Property '${currentProperty}' was added with value: ${normalize(container.value)}`];
+        acc.push(`Property '${currentProperty}' was added with value: ${normalize(container.value)}`);
       }
       if (container.type === 'obj') {
-        return [...acc, `${iter(container.value, `${currentProperty}`)}`];
+        acc.push(`${iter(container.value, `${currentProperty}`)}`);
       }
-      return acc;
+      return (temp === acc) ? temp : acc;
     }, []);
     return reduced.join('\n');
   };
