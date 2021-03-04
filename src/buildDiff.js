@@ -22,29 +22,25 @@ const buildDiff = (obj1, obj2) => {
   const sorted = _.orderBy(uniqeKeys);
   const result = sorted.reduce((acc, key) => {
     const node = {};
+    node.name = key;
     if ((typeof obj1[key] === 'object') && (typeof obj2[key] === 'object')) {
       node.type = 'obj';
-      node.name = key;
       node.value = buildDiff(obj1[key], obj2[key]);
     }
     if (obj1[key] === undefined) {
       node.type = 'new';
-      node.name = key;
       node.value = obj2[key];
     }
     if (obj2[key] === undefined) {
       node.type = 'deleted';
-      node.name = key;
       node.value = obj1[key];
     }
     if (obj1[key] === obj2[key]) {
       node.type = 'same';
-      node.name = key;
       node.value = obj1[key];
     }
     if (node.type === undefined) {
       node.type = 'changed';
-      node.name = key;
       node.value = [obj1[key], obj2[key]];
       return [...acc, node];
     }
