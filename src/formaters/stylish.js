@@ -11,12 +11,12 @@ const format = (data, replacer = ' ', spaceCount = 4) => {
     if (Array.isArray(obj)) {
       const maped = obj.map((current) => {
         const changedContainerToStr = (container) => {
-          const preState = `${indent}- ${container.key}: ${iterTree(container.value[0], currSpaceCount + spaceCount)}`;
-          const postState = `${indent}+ ${container.key}: ${iterTree(container.value[1], currSpaceCount + spaceCount)}`;
+          const preState = `${indent}- ${container.name}: ${iterTree(container.value[0], currSpaceCount + spaceCount)}`;
+          const postState = `${indent}+ ${container.name}: ${iterTree(container.value[1], currSpaceCount + spaceCount)}`;
           return `${preState}\n${postState}`;
         };
         const containerToStr = (container) => {
-          const keyValue = `${container.key}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
+          const keyValue = `${container.name}: ${iterTree(container.value, currSpaceCount + spaceCount)}`;
           const resultStr = {
             deleted: `${indent}- ${keyValue}`,
             new: `${indent}+ ${keyValue}`,
@@ -32,11 +32,11 @@ const format = (data, replacer = ' ', spaceCount = 4) => {
     }
 
     const keys = Object.keys(obj);
-    const constructor = keys.map((key) => {
-      if (typeof obj[key] === 'object') {
-        return `${indent}  ${key}: ${iterTree(obj[key], currSpaceCount + spaceCount)}`;
+    const constructor = keys.map((name) => {
+      if (typeof obj[name] === 'object') {
+        return `${indent}  ${name}: ${iterTree(obj[name], currSpaceCount + spaceCount)}`;
       }
-      return `${indent}  ${key}: ${obj[key]}`;
+      return `${indent}  ${name}: ${obj[name]}`;
     });
     const str = constructor.join('\n');
     const resultStr = `{\n${str}\n${bracketIndent}}`;

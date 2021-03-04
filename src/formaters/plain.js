@@ -15,7 +15,7 @@ const format = (data) => {
   const iter = (data1, parent) => {
     const reduced = data1.reduce((acc, container) => {
       const currentParrent = (parent === '') ? '' : `${parent}.`;
-      const currentProperty = `${currentParrent}${container.key}`;
+      const currentProperty = `${currentParrent}${container.name}`;
 
       if (container.type === 'changed') {
         return [...acc, `Property '${currentProperty}' was updated. From ${normalize(container.value[0])} to ${normalize(container.value[1])}`];
