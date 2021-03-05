@@ -10,7 +10,7 @@ cd frontend-project-lvl2
 make install
 make link</pre>
 
-This is my second project. Main task was to make utilite, which compares two configuration files and shows a difference.
+This is my second project. Main task was to make utility, which compares two configuration files and shows a difference.
 `gendiff` is a command-line utility.
 
 <h2>Usage:</h2>
