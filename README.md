@@ -12,11 +12,11 @@ make link</pre>
 <h2>Usage:</h2>
 <pre>Usage: gendiff [options] &lt;filepath1&gt; &lt;filepath2&gt;
 
-Compares two configuration files and shows a difference.
-
+This is my second project. Main task was to make utilite, which compares two configuration files and shows a difference.
+`gendiff` is a command-line utility.
 Options:
   -V, --version        output the version number
-  -f, --format [type]  output format 
+  -f, --format [type]  output format. Default 'stylish'. Available: 'stylish', 'plain', 'json'.
   -h, --help           output usage information
 </pre>
 <h3>Asciinema previews</h3>
