@@ -1,15 +1,11 @@
 const normalize = (value) => {
-  if (value === null) {
-    return `${value}`;
+  if ((typeof value === 'object') && (value !== null)) {
+    return '[complex value]';
   }
-  switch (typeof value) {
-    case 'string':
-      return `'${value}'`;
-    case 'object':
-      return '[complex value]';
-    default:
-      return `${value}`;
+  if (typeof value === 'string') {
+    return `'${value}'`;
   }
+  return `${value}`;
 };
 const format = (data) => {
   const iter = (data1, parent) => {
