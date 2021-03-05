@@ -38,10 +38,3 @@ test('buildDiff files in JSON format', () => {
   const actualResult = genDiff(file1Path, file2Path, 'json');
   expect(actualResult).toBe(expectedResult);
 });
-// test('buildDiff files in not supported format', () => {
-//   const file1Path = path.join(__dirname, '..', '__fixtures__', 'file1.json');
-//   const file2Path = path.join(__dirname, '..', '__fixtures__', 'file2.json');
-//   const expectedResult = '[any] format not supported';
-//   const actualResult = genDiff(file1Path, file2Path, 'any');
-//   expect(actualResult).toBe(expectedResult);
-// });
