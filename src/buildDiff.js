@@ -1,5 +1,27 @@
 import _ from 'lodash';
 
+const makeNode = (obj1, obj2, key) => {
+  const node = {};
+  node.name = key;
+  if (obj1[key] === undefined) {
+    node.type = 'new';
+    node.value = obj2[key];
+  }
+  if (obj2[key] === undefined) {
+    node.type = 'deleted';
+    node.value = obj1[key];
+  }
+  if (obj1[key] === obj2[key]) {
+    node.type = 'same';
+    node.value = obj1[key];
+  }
+  if (node.type === undefined) {
+    node.type = 'changed';
+    node.value = [obj1[key], obj2[key]];
+  }
+  return node;
+};
+
 const buildDiff = (obj1, obj2) => {
   const keysObj1 = Object.keys(obj1);
   const keysObj2 = Object.keys(obj2);
@@ -7,40 +29,14 @@ const buildDiff = (obj1, obj2) => {
   const uniqeKeys = Array.from(new Set(concatKeys));
   const sorted = _.orderBy(uniqeKeys);
   const result = sorted.reduce((acc, key) => {
-    const current = {};
+    const node = {};
+    node.name = key;
     if ((typeof obj1[key] === 'object') && (typeof obj2[key] === 'object')) {
-      current.name = key;
-      current.type = 'obj';
-      current.value = buildDiff(obj1[key], obj2[key]);
-      acc.push(current);
-      return acc;
+      node.type = 'obj';
+      node.value = buildDiff(obj1[key], obj2[key]);
+      return [...acc, node];
     }
-    if (obj1[key] === undefined) {
-      current.name = key;
-      current.type = 'new';
-      current.value = obj2[key];
-      acc.push(current);
-      return acc;
-    }
-    if (obj2[key] === undefined) {
-      current.name = key;
-      current.type = 'deleted';
-      current.value = obj1[key];
-      acc.push(current);
-      return acc;
-    }
-    if (obj1[key] === obj2[key]) {
-      current.name = key;
-      current.type = 'same';
-      current.value = obj1[key];
-      acc.push(current);
-      return acc;
-    }
-    current.name = key;
-    current.type = 'changed';
-    current.value = [obj1[key], obj2[key]];
-    acc.push(current);
-    return acc;
+    return [...acc, makeNode(obj1, obj2, key)];
   }, []);
   return result;
 };
