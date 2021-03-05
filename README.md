@@ -4,14 +4,14 @@
 <a href="https://codeclimate.com/github/steshi/frontend-project-lvl2/maintainability"><img src="https://api.codeclimate.com/v1/badges/984a1da5cb4188c46ec9/maintainability" /></a>
 <a href="https://codeclimate.com/github/steshi/frontend-project-lvl2/test_coverage"><img src="https://api.codeclimate.com/v1/badges/984a1da5cb4188c46ec9/test_coverage" /></a>
 
+This is my second project. Main task was to make utility, which compares two configuration files and shows a difference.<br>
+`gendiff` is a command-line utility.
+
 <h2>Install: </h2>
 <pre>git clone https://github.com/steshi/frontend-project-lvl2.git
 cd frontend-project-lvl2
 make install
 make link</pre>
-
-This is my second project. Main task was to make utility, which compares two configuration files and shows a difference.<br>
-`gendiff` is a command-line utility.
 
 <h2>Usage:</h2>
 <pre>Usage: gendiff [options] &lt;filepath1&gt; &lt;filepath2&gt;
