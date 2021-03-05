@@ -1,25 +1,29 @@
 import _ from 'lodash';
 
 const makeNode = (obj1, obj2, key) => {
-  const node = {};
-  node.name = key;
+  // const node = {};
+  // node.name = key;
   if (obj1[key] === undefined) {
-    node.type = 'new';
-    node.value = obj2[key];
+    return { name: key, type: 'new', value: obj2[key] };
+    // node.type = 'new';
+    // node.value = obj2[key];
   }
   if (obj2[key] === undefined) {
-    node.type = 'deleted';
-    node.value = obj1[key];
+    return { name: key, type: 'deleted', value: obj1[key] };
+    // node.type = 'deleted';
+    // node.value = obj1[key];
   }
   if (obj1[key] === obj2[key]) {
-    node.type = 'same';
-    node.value = obj1[key];
+    return { name: key, type: 'same', value: obj1[key] };
+    // node.type = 'same';
+    // node.value = obj1[key];
   }
-  if (node.type === undefined) {
-    node.type = 'changed';
-    node.value = [obj1[key], obj2[key]];
-  }
-  return node;
+  // if (node.type === undefined) {
+  return { name: key, type: 'changed', value: [obj1[key], obj2[key]] };
+  // node.type = 'changed';
+  // node.value = [obj1[key], obj2[key]];
+  // }
+  // return node;
 };
 
 const buildDiff = (obj1, obj2) => {
