@@ -9,11 +9,12 @@
 cd frontend-project-lvl2
 make install
 make link</pre>
-<h2>Usage:</h2>
-<pre>Usage: gendiff [options] &lt;filepath1&gt; &lt;filepath2&gt;
 
 This is my second project. Main task was to make utilite, which compares two configuration files and shows a difference.
 `gendiff` is a command-line utility.
+
+<h2>Usage:</h2>
+<pre>Usage: gendiff [options] &lt;filepath1&gt; &lt;filepath2&gt;
 Options:
   -V, --version        output the version number
   -f, --format [type]  output format. Default 'stylish'. Available: 'stylish', 'plain', 'json'.
