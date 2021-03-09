@@ -1,6 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/steshi/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/steshi/frontend-project-lvl2/actions)
-![Node CI](https://github.com/steshi/frontend-project-lvl2/workflows/Node%20CI/badge.svg)
+[![Node CI] (https://github.com/steshi/frontend-project-lvl2/workflows/Node%20CI/badge.svg)](https://github.com/steshi/frontend-project-lvl2/actions/workflows/nodejs.yml)
 <a href="https://codeclimate.com/github/steshi/frontend-project-lvl2/maintainability"><img src="https://api.codeclimate.com/v1/badges/984a1da5cb4188c46ec9/maintainability" /></a>
 <a href="https://codeclimate.com/github/steshi/frontend-project-lvl2/test_coverage"><img src="https://api.codeclimate.com/v1/badges/984a1da5cb4188c46ec9/test_coverage" /></a>
 

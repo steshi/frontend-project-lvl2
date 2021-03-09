@@ -19,12 +19,12 @@ const buildDiff = (obj1, obj2) => {
   const concatKeys = [...keysObj1, ...keysObj2];
   const uniqeKeys = Array.from(new Set(concatKeys));
   const sorted = _.orderBy(uniqeKeys);
-  const result = sorted.reduce((acc, key) => {
+  const result = sorted.map((key) => {
     if ((typeof obj1[key] === 'object') && (typeof obj2[key] === 'object')) {
-      return [...acc, { name: key, type: 'obj', value: buildDiff(obj1[key], obj2[key]) }];
+      return { name: key, type: 'obj', value: buildDiff(obj1[key], obj2[key]) };
     }
-    return [...acc, makeNode(obj1, obj2, key)];
-  }, []);
+    return makeNode(obj1, obj2, key);
+  });
   return result;
 };
 

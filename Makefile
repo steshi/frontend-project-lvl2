@@ -1,5 +1,7 @@
 install:
 	npm install
+link:
+	npm link
 gendiff:
 	node bin/genDiff.js
 publish:

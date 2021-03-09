@@ -1,7 +1,7 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.2",
-  "description": "[![Actions Status](https://github.com/steshi/frontend-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/steshi/frontend-project-lvl2/actions)",
+  "description": "gendiff is utility, which compares two configuration files and shows a difference",
   "main": "index.js",
   "scripts": {
     "test": "npx jest"
