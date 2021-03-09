@@ -11,7 +11,7 @@ const getContent = (filePath) => {
   return content;
 };
 
-const genDiff = (filepath1, filepath2, formatType) => {
+const genDiff = (filepath1, filepath2, formatType = 'stylish') => {
   const content1 = getContent(filepath1);
   const content2 = getContent(filepath2);
   const ast = buildDiff(content1, content2);
