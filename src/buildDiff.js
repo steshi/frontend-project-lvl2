@@ -1,16 +1,16 @@
 import _ from 'lodash';
 
-const makeNode = (obj1, obj2, key) => {
-  if (obj1[key] === undefined) {
-    return { name: key, type: 'new', value: obj2[key] };
+const nodeType = (obj1, obj2, key) => {
+  if (!_.has(obj1, key)) {
+    return 'new';
   }
-  if (obj2[key] === undefined) {
-    return { name: key, type: 'deleted', value: obj1[key] };
+  if (!_.has(obj2, key)) {
+    return 'deleted';
   }
   if (obj1[key] === obj2[key]) {
-    return { name: key, type: 'same', value: obj1[key] };
+    return 'same';
   }
-  return { name: key, type: 'changed', value: [obj1[key], obj2[key]] };
+  return 'changed';
 };
 
 const buildDiff = (obj1, obj2) => {
@@ -23,7 +23,16 @@ const buildDiff = (obj1, obj2) => {
     if ((typeof obj1[key] === 'object') && (typeof obj2[key] === 'object')) {
       return { name: key, type: 'obj', value: buildDiff(obj1[key], obj2[key]) };
     }
-    return makeNode(obj1, obj2, key);
+    switch (nodeType(obj1, obj2, key)) {
+      case 'new':
+        return { name: key, type: 'new', value: obj2[key] };
+      case 'deleted':
+        return { name: key, type: 'deleted', value: obj1[key] };
+      case 'same':
+        return { name: key, type: 'same', value: obj1[key] };
+      default:
+        return { name: key, type: 'changed', value: [obj1[key], obj2[key]] };
+    }
   });
   return result;
 };
