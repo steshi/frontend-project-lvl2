@@ -7,7 +7,7 @@ const nodeType = (obj1, obj2, key) => {
   if (!_.has(obj2, key)) {
     return 'deleted';
   }
-  if (obj1[key] === obj2[key]) {
+  if (_.isEqual(obj1[key], obj2[key])) {
     return 'same';
   }
   return 'changed';
