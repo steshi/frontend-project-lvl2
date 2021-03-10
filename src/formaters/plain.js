@@ -1,29 +1,34 @@
-const normalize = (value) => {
-  if ((typeof value === 'object') && (value !== null)) {
+import _ from 'lodash';
+
+const stringify = (value) => {
+  if (_.isObject(value)) {
     return '[complex value]';
   }
-  if (typeof value === 'string') {
+  if (_.isString(value)) {
     return `'${value}'`;
   }
   return `${value}`;
 };
+
 const format = (data) => {
   const iter = (data1, parent) => {
-    const reduced = data1.reduce((acc, container) => {
+    const maped = data1.map((container) => {
       const currentParrent = (parent === '') ? '' : `${parent}.`;
       const currentProperty = `${currentParrent}${container.name}`;
       const any = {
-        changed: `Property '${currentProperty}' was updated. From ${normalize(container.value[0])} to ${normalize(container.value[1])}`,
+        changed: `Property '${currentProperty}' was updated. From ${stringify(container.value[0])} to ${stringify(container.value[1])}`,
         deleted: `Property '${currentProperty}' was removed`,
-        new: `Property '${currentProperty}' was added with value: ${normalize(container.value)}`,
+        new: `Property '${currentProperty}' was added with value: ${stringify(container.value)}`,
       };
       if (container.type === 'obj') {
-        return [...acc, `${iter(container.value, `${currentProperty}`)}`];
+        return [`${iter(container.value, `${currentProperty}`)}`];
       }
-      const newAcc = (container.type === 'same') ? acc : [...acc, any[container.type]];
-      return newAcc;
-    }, []);
-    return reduced.join('\n');
+      return (container.type === 'same') ? '' : [any[container.type]];
+    });
+    const result = maped
+      .filter((str) => str !== '')
+      .join('\n');
+    return result;
   };
 
   return iter(data, '');
