@@ -1,6 +1,8 @@
+import _ from 'lodash';
+
 const format = (data, replacer = ' ', spaceCount = 4) => {
   const iterTree = (obj, currSpaceCount) => {
-    if ((typeof obj !== 'object') || (obj === null)) {
+    if (!_.isObject(obj)) {
       return `${obj}`;
     }
 
@@ -33,7 +35,7 @@ const format = (data, replacer = ' ', spaceCount = 4) => {
 
     const keys = Object.keys(obj);
     const constructor = keys.map((name) => {
-      if (typeof obj[name] === 'object') {
+      if (_.isObject(obj[name])) {
         return `${indent}  ${name}: ${iterTree(obj[name], currSpaceCount + spaceCount)}`;
       }
       return `${indent}  ${name}: ${obj[name]}`;
